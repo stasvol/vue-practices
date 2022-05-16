@@ -1,5 +1,7 @@
 <template>
-  <ul class="sidenav app-sidenav" :class="{open: !isOpen}">
+  <ul class="sidenav app-sidenav" :class="{open: !value}" >
+<!--      :class="['open', {value}]"-->
+<!--    :class="{open: value}"-->
     <router-link
       v-for="link in links"
       :key="link.path"
@@ -30,7 +32,7 @@
 </template>
 <script>
 export default {
-  props:['isOpen'],
+  props:['value'],
   data:() => ({
     links: [
       {title: 'Счет', path: '/', exact: true},
@@ -38,7 +40,7 @@ export default {
       {title: 'Планирование', path: '/planning'},
       {title: 'Новая запис', path: '/record'},
       {title: 'Категории', path: '/categories'},
-    ]
+    ],
   })
 }
 </script>
@@ -53,5 +55,7 @@ a  .waves-effect {
  .active  a {
   background: #e8e7e0;
 }
-
+/* .app-sidenav.open {*/
+/*  display: block;*/
+/*}*/
 </style>

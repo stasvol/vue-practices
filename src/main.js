@@ -4,5 +4,11 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min'
+import dateFilter from "@/filters/dateFilter";
+import {filter} from "core-js/internals/array-iteration";
 
-createApp(App).use(store).use(router).mount('#app')
+
+const app = createApp(App)
+app.config.globalProperties.$filters = filter('date', dateFilter)
+
+app.use(store).use(router).mount('#app')
