@@ -1,5 +1,6 @@
 <template>
   <ul class="sidenav app-sidenav" :class="{open: !isOpen}">
+<!--    :class="isOpen ? 'open': null "-->
     <router-link
       v-for="link in links"
       :key="link.path"
