@@ -5,7 +5,7 @@
         <a href="#"  @click.stop ="$emit('click')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ date }}</span>
+        <span class="black-text">{{ $filters.dateFilter(date) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -40,10 +40,12 @@
 </template>
 <script>
 export default {
+  // props: ['options'],
   data:() =>({
     date: new Date(),
     interval: null,
-    dropdown: null
+    dropdown: null,
+    format: null
   }),
   methods: {
     logout() {
@@ -66,7 +68,14 @@ export default {
       this.dropdown.destroy()
     }
   },
+ computed: {
+   dateFilter(value, format = 'date' && 'time') {
+     // this.time=time.getCurrentTime()
+     // console.log(value)
+     return value
+   }
 
+ }
 
 }
 </script>
