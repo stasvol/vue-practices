@@ -31,3 +31,4 @@ app.config.globalProperties.$filters = {
 }
 
 app.use(store).use(router).mount('#app')
+
