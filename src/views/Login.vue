@@ -14,7 +14,9 @@
 
         <small
             class="helper-text invalid"
-            v-if="v$.email.$error">Email field required. &nbsp; HAS AN ERROR !
+            v-if="v$.email.$error"
+        >
+          Email field required. &nbsp; HAS AN ERROR !
         </small>
       </div>
       <div class="input-field">
@@ -27,7 +29,9 @@
         <label for="password">Пароль</label>
         <small
             class="helper-text invalid"
-            v-if="v$.password.$error">Password field is required and length {{password.length}} - should be: {{v$.password.minLength.$params.min}}.&nbsp; HAS AN ERROR !
+            v-if="v$.password.$error"
+        >
+          Password field is required and length {{password.length}} - should be: {{v$.password.minLength.$params.min}}.&nbsp; HAS AN ERROR !
         </small>
 <!--        <small-->
 <!--           class="helper-text invalid"-->
@@ -70,6 +74,7 @@
 
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
+import messages from "@/utils/messages";
 export default {
   name: 'login',
   setup () {
@@ -86,13 +91,22 @@ export default {
          password: {required, minLength: minLength(6)},
        }
   },
-
+   mounted() {
+    if (messages[this.$route.query.message]) {
+      M.toast({html: messages[this.$route.query.message]})
+    }
+   },
   methods: {
     onSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch()
         return
       }
+     const formData = {
+         email: this.email,
+         password: this.password
+      }
+      console.log(formData)
       this.$router.push('/')
     }
   },

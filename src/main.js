@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min'
+import mesPlugin from "@/utils/mesPlugin";
 
 const app = createApp(App)
 // app.config.globalProperties.$filters = filter('date', dateFilter)
@@ -30,5 +31,5 @@ app.config.globalProperties.$filters = {
     }
 }
 
-app.use(store).use(router).mount('#app')
+app.use(mesPlugin).use(store).use(router).mount('#app')
 
