@@ -106,9 +106,13 @@ export default {
          email: this.email,
          password: this.password
       }
-     await this.$store.dispatch('login', formData)
-      console.log(formData)
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch('login', formData)
+        await this.$router.push('/')
+      } catch (e) {
+
+      }
+
     }
   },
 }

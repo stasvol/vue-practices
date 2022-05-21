@@ -1,5 +1,5 @@
-<template>
-  <ul class="sidenav app-sidenav" :class="{open: !value}" >
+<template >
+  <ul class="sidenav app-sidenav " :class="{open: !value}">
 <!--      :class="['open', {value}]"-->
 <!--    :class="{open: value}"-->
     <router-link
@@ -55,7 +55,11 @@ a  .waves-effect {
  .active  a {
   background: #e8e7e0;
 }
-/* .app-sidenav.open {*/
-/*  display: block;*/
-/*}*/
+ /*.nodOpen ul {*/
+ /*  display: none !important;*/
+ /*}*/
+ /*.hasOpen ul {*/
+ /*  display: block !important;*/
+ /*}*/
+
 </style>

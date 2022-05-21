@@ -6,7 +6,13 @@ import store from './store'
 import 'materialize-css/dist/js/materialize.min'
 import mesPlugin from "@/utils/mesPlugin";
 
-import firebase from "firebase/app";
+// import firebase from "firebase/app"; // v.8 and <
+// import firebase from 'firebase/compat/app'  // v.9 >
+import 'firebase/compat/auth';
+import firebase from "firebase/compat/app";
+import 'firebase/compat/firestore';
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import 'firebase/auth';
 import 'firebase/database';
 import { initializeApp } from "firebase/app";
@@ -47,10 +53,16 @@ const firebaseConfig = {
     measurementId: "G-CYTG48RDWF"
 };
 
-const firebaseApp = initializeApp ( firebaseConfig );
-console.log(firebaseApp)
-
-app.use(mesPlugin).use(store).use(router).mount('#app')
+const firebaseApp = firebase.initializeApp ( firebaseConfig );
+const analytics = getAnalytics(firebaseApp);
+// const db = getFirestore(app);
+let appMain
+firebase.auth().onAuthStateChanged(() => {
+    if (!appMain) {
+        appMain = app.use(mesPlugin).use(store).use(router).mount('#app')
+    }
+});
+// app.use(mesPlugin).use(store).use(router).mount('#app')
 
 // firebase.initializeApp({
 //     apiKey: "AIzaSyDygVhxrVQsPuab4aZUo2us9JJdlGCvxEQ",
@@ -61,7 +73,6 @@ app.use(mesPlugin).use(store).use(router).mount('#app')
 //     appId: "1:480602155075:web:d0e769f280573a097d8cf6",
 //     measurementId: "G-CYTG48RDWF"
 // });
-
 // firebase.auth().onAuthStateChanged(() => {
 //     if (!app) {
 //         app.use(mesPlugin).use(store).use(router).mount('#app')
