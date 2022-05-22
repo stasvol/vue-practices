@@ -118,7 +118,7 @@ export default {
     }
     },
   methods: {
-    onSubmit() {
+   async onSubmit() {
      if (this.v$.$invalid) {
        this.v$.$touch()
        return
@@ -130,9 +130,13 @@ export default {
        // ch: this.ch,
        // agree: this.agree
      }
-      console.log(formData)
-      this.$router.push('/')
-    }
+     try {
+       await this.$store.dispatch('register',formData)
+       await this.$router.push('/')
+     }catch (e) {
+       throw e
+     }
+   }
   },
 }
 </script>

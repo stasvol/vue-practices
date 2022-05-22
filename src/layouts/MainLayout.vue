@@ -3,7 +3,7 @@
 
     <Navbar @click="isOpen = !isOpen"/>
 
-    <Sidebar v-model="isOpen"/>
+    <Sidebar v-model="isOpen" />
 
     <main class="app-content" :class="{full: !isOpen}">
 <!--      :class="{full: !isOpen}"-->

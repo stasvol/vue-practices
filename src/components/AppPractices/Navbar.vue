@@ -2,7 +2,7 @@
   <nav class="navbar orange lighten-1">
     <div class="nav-wrapper">
       <div class="navbar-left" >
-        <a href="#"  @click.stop ="$emit('click')">
+        <a href="#" @click.stop.prevent ="$emit('click')">
           <i class="material-icons black-text">dehaze</i>
         </a>
         <span class="black-text">{{ $filters.dateFilter(date) }}</span>
@@ -48,9 +48,9 @@ export default {
     format: null
   }),
   methods: {
-    logout() {
-      console.log('logout')
-      this.$router.push('/login?message=logout')
+    async logout() {
+     await this.$store.dispatch('logout')
+     await this.$router.push('/login?message=logout')
     }
   },
   mounted() {

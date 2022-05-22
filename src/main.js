@@ -11,10 +11,11 @@ import mesPlugin from "@/utils/mesPlugin";
 import 'firebase/compat/auth';
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
+import 'firebase/compat/database';
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import 'firebase/auth';
-import 'firebase/database';
+// import 'firebase/auth';
+
 import { initializeApp } from "firebase/app";
 
 const app = createApp(App)

@@ -3,3 +3,21 @@
     <router-view/>
   </div>
 </template>
+<script>
+import messages from "@/utils/messages";
+
+export default {
+  computed: {
+    error() {
+     return this.$store.getters.error
+    }
+  },
+  watch:{
+    error(fbError) {
+      console.log(fbError)
+      // this.$error(messages[fbError.code] || 'Error! User not found.')
+      M.toast({html: `[Error]: ${messages[fbError.code] || 'Error! User not found.'}` })
+    }
+  }
+}
+</script>
