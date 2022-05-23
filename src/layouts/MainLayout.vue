@@ -5,7 +5,7 @@
 
     <Sidebar v-model="isOpen" />
 
-    <main class="app-content" :class="{full: !isOpen}">
+    <main class="app-content">
 <!--      :class="{full: !isOpen}"-->
       <div class="app-page">
         <router-view />
@@ -26,11 +26,11 @@ export default {
   data:() => ({
     isOpen: true
   }),
-  // methods: {
-  //  toggle () {
-  //   this.isOpen = !this.isOpen
-  //  }
-  // },
+async mounted() {
+   if (!Object.keys(this.$store.getters.info).length) {
+    await this.$store.dispatch('getInfo')
+   }
+ },
   components: {
     Navbar,Sidebar
   }

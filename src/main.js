@@ -5,7 +5,8 @@ import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min'
 import mesPlugin from "@/utils/mesPlugin";
-
+import Loader from "@/components/AppPractices/Loader";
+import Vue from 'vue'
 // import firebase from "firebase/app"; // v.8 and <
 // import firebase from 'firebase/compat/app'  // v.9 >
 import 'firebase/compat/auth';
@@ -60,7 +61,7 @@ const analytics = getAnalytics(firebaseApp);
 let appMain
 firebase.auth().onAuthStateChanged(() => {
     if (!appMain) {
-        appMain = app.use(mesPlugin).use(store).use(router).mount('#app')
+        appMain = app.use('Loader', Loader).use(mesPlugin).use(store).use(router).mount('#app')
     }
 });
 // app.use(mesPlugin).use(store).use(router).mount('#app')
