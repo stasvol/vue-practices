@@ -6,6 +6,7 @@ import store from './store'
 import 'materialize-css/dist/js/materialize.min'
 import mesPlugin from "@/utils/mesPlugin";
 import Loader from "@/components/AppPractices/Loader";
+import currencyFilter from "@/filters/currencyFilter";
 import Vue from 'vue'
 // import firebase from "firebase/app"; // v.8 and <
 // import firebase from 'firebase/compat/app'  // v.9 >
@@ -16,8 +17,9 @@ import 'firebase/compat/database';
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 // import 'firebase/auth';
-
 import { initializeApp } from "firebase/app";
+import {values} from "core-js/stable/dom-collections";
+
 
 const app = createApp(App)
 
@@ -42,6 +44,12 @@ app.config.globalProperties.$filters = {
         // }
         return new Intl.DateTimeFormat('uk-UK', options).format(new Date(value))
         // return new Intl.DateTimeFormat('uk-UK').format(new Date(value))
+    },
+    currencyFilter (number, currency='UAH') {
+        return new Intl.NumberFormat('uk-UK', {
+            style: 'currency',
+            currency
+        }).format(number)
     }
 }
 
@@ -61,7 +69,7 @@ const analytics = getAnalytics(firebaseApp);
 let appMain
 firebase.auth().onAuthStateChanged(() => {
     if (!appMain) {
-        appMain = app.use('Loader', Loader).use(mesPlugin).use(store).use(router).mount('#app')
+        appMain = app.use('Loader', Loader).use('currency',currencyFilter).use(mesPlugin).use(store).use(router).mount('#app')
     }
 });
 // app.use(mesPlugin).use(store).use(router).mount('#app')

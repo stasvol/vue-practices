@@ -32,16 +32,16 @@ export default createStore({
      //      .catch(error => console.log('error', error));
 
      //const key = process.env.VUE_APP_FIXER
-      const res = await fetch('https://api.apilayer.com/fixer/latest?base=EUR&symbols=USD,EUR,UAH', {
+      const res = await fetch('https://api.apilayer.com/fixer/latest?base=EUR&symbols=UAH,USD,EUR', {
         method: 'GET',
         headers: {
-          apikey: 'MJS7Pt6Mhz3se6SS62Gx7aw4TeHhOnOQ',
+          apikey: 'l1A81VnsCyl10VI8BabFL67G0sv6j8bP',
         }
       })
-//          fetch('https://api.apilayer.com/fixer/latest?base=USD&symbols=EUR,GBP',{
-//              metchod: 'GET',
-// header:{ 'apikey: YOUR API KEY'}})
-      return await res.json()
+//  fetch('https://api.apilayer.com/fixer/latest?base=USD&symbols=EUR,GBP',{
+//  metchod: 'GET',
+//  header:{ 'apikey: YOUR API KEY'}})
+        return await res.json()
     }
   },
   modules: {
