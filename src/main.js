@@ -45,11 +45,11 @@ app.config.globalProperties.$filters = {
         return new Intl.DateTimeFormat('uk-UK', options).format(new Date(value))
         // return new Intl.DateTimeFormat('uk-UK').format(new Date(value))
     },
-    currencyFilter (number, currency='UAH') {
+    currencyFilter (value, currency='UAH') {
         return new Intl.NumberFormat('uk-UK', {
             style: 'currency',
             currency
-        }).format(number)
+        }).format(value)
     }
 }
 
