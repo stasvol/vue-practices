@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import auth from './auth'
 import info from './info';
-import categories from "./categories";
+import category from "./category";
 
 export default createStore({
   state: {
@@ -46,6 +46,6 @@ export default createStore({
     }
   },
   modules: {
-    auth,info,categories
+    auth,info,category
   }
 })
