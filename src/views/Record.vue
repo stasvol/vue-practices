@@ -4,11 +4,26 @@
       <h3>Новая запись</h3>
     </div>
 
-    <form class="form">
+    <Loader v-if="loading" />
+
+    <h5 class="center" v-else-if="!categories.length">
+      Has no categories.
+      <router-link to="/categories">
+        Add a new category
+      </router-link>
+    </h5>
+
+    <form class="form" v-else @submit.prevent="onSubmit">
       <div class="input-field" >
-        <select>
+
+        <select ref="select" v-model="category">
           <option
-          >name cat</option>
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.title }}
+          </option>
         </select>
         <label>Выберите категорию</label>
       </div>
@@ -20,6 +35,7 @@
               name="type"
               type="radio"
               value="income"
+              v-model="type"
           />
           <span>Доход</span>
         </label>
@@ -32,6 +48,7 @@
               name="type"
               type="radio"
               value="outcome"
+              v-model="type"
           />
           <span>Расход</span>
         </label>
@@ -41,19 +58,43 @@
         <input
             id="amount"
             type="number"
+            v-model.number="amount"
+            :class="{invalid: v$.amount.$dirty && !v$.amount.minValue}"
         >
         <label for="amount">Сумма</label>
-        <span class="helper-text invalid">amount пароль</span>
+        <span
+            class="helper-text invalid"
+            v-if="v$.amount.$error"
+        >
+          Minimum value {{v$.amount.minValue.$params.min}}
+        </span>
       </div>
 
       <div class="input-field">
         <input
             id="description"
             type="text"
+            v-model="description"
+            :class="{invalid: v$.description.$dirty && !v$.description.required}"
         >
         <label for="description">Описание</label>
         <span
-            class="helper-text invalid">description пароль</span>
+            class="helper-text invalid"
+            v-if="v$.description.$error"
+        >
+           Field is required.
+        </span>
+      </div>
+      <div>
+        <i class="invalid" v-for="error of v$.$errors"
+           :key="error.$uid"
+        >
+          <strong>{{ error.$validator }}</strong>
+          <small> on property</small>
+          <strong>{{ error.$property }}</strong>
+          <small> says:</small>
+          <strong>{{ error.$message }}</strong>
+        </i>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
@@ -63,7 +104,103 @@
     </form>
   </div>
 </template>
+<script>
+import Loader from "@/components/AppPractices/Loader";
+import useVuelidate from "@vuelidate/core";
+import {minValue, required} from "@vuelidate/validators";
+import {mapGetters} from "vuex";
+export default {
+  name: 'record',
+  components: {Loader},
 
+  data: () => ({
+    loading: true,
+    categories: [],
+    select: null,
+    category: null,
+    type: 'outcome',
+    amount: 1,
+    description: '',
+  }),
+
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  validations() {
+    return {
+      amount: {required, minValue: minValue(10)},
+      description: {required}
+    }
+  },
+
+  async mounted() {
+    this.categories = await this.$store.dispatch('fetchCategories')
+    this.loading = false
+    if (this.categories.length) {
+      this.category = this.categories[0].id
+    }
+    setTimeout(()=>{
+      this.select = M.FormSelect.init(this.$refs.select);
+      M.updateTextFields();
+    },0)
+
+  },
+
+  unmounted() {
+    if (this.select && this.select.unmounted) {
+      this.select.unmounted()
+    }
+  },
+
+  computed: {
+    ...mapGetters(['info']),
+
+    canCreateRecord() {
+      if (this.type === 'income') {
+        return true
+      }
+      return this.info.bill >= this.amount
+    }
+  },
+
+  methods: {
+   async onSubmit() {
+      if (this.v$.$invalid) {
+        this.v$.$touch()
+        return
+      }
+
+       if (this.canCreateRecord) {
+         try {
+           await this.$store.dispatch('createRecord', {
+             categoryId: this.category,
+             amount: this.amount,
+             description: this.description,
+             type: this.type,
+             data: new Date().toJSON()
+           })
+
+           const bill = this.type === 'income'
+             ? this.info.bill + this.amount
+             : this.info.bill - this.amount
+           await this.$store.dispatch('updateInfo', {bill})
+           M.toast({html: `Record created. `})
+           this.v$.$reset()
+           this.amount = 1
+           this.description = ''
+         } catch (e) {}
+       } else {
+         M.toast({html: `Not enough money (${this.amount - this.info.bill})`})
+       }
+   }
+  }
+}
+</script>
+<style>
+.invalid {
+  color: #f10909;
+}
+</style>
 
 <!--<template>-->
 <!--  <div>-->
