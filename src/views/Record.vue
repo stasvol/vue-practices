@@ -184,13 +184,13 @@ export default {
              ? this.info.bill + this.amount
              : this.info.bill - this.amount
            await this.$store.dispatch('updateInfo', {bill})
-           M.toast({html: `Record created. `})
+           M.toast({html: 'Record created.'})
            this.v$.$reset()
            this.amount = 1
            this.description = ''
          } catch (e) {}
        } else {
-         M.toast({html: `Not enough money (${this.amount - this.info.bill})`})
+         M.toast({html: `Not enough money (-${this.amount - this.info.bill})`})
        }
    }
   }

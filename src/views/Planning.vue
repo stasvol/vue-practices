@@ -1,26 +1,98 @@
 <template>
   <div>
     <div class="page-title">
+<!--      <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover me!</a>-->
       <h3>Планирование</h3>
-      <h4>12 212</h4>
-    </div>
+      <h4>{{ info.bill}} {{money}}
+<!--        {{$filters.currencyFilter('UAH')}} -->
 
-    <section>
-      <div>
+        </h4>
+    </div>
+   <Loader v-if="loading" />
+    <h5 class="center" v-else-if="!categories.length">
+      Has no categories.
+      <router-link to="/categories">
+        Add a new category
+      </router-link>
+    </h5>
+    <section v-else>
+      <div v-for="category in categories" :key="category.id">
         <p>
-          <strong>Девушка:</strong>
-          12 122 из 14 0000
+          <strong>{{ category.title }}:</strong>
+          {{ category.spend }}{{money}} из {{ category.limit }}{{money}}
         </p>
-        <div class="progress" >
+<!--        <div-->
+<!--            class="tooltipped"-->
+<!--            data-position="top"-->
+<!--            data-tooltip="This is some extra information in a tooltip placement top">-->
+<!--        > -->
+        <div class="progress">
           <div
-              class="determinate green"
-              style="width:40%"
+              class="determinate"
+              :class="[category.progressColor]"
+              :style="{width: category.progressPercent + '%'}"
           ></div>
         </div>
+<!--        </div>-->
       </div>
     </section>
   </div>
 </template>
+<script>
+import Loader from "@/components/AppPractices/Loader";
+import {mapGetters} from "vuex";
+import category from "@/store/category";
+export default {
+  name:'planning',
+  components: {Loader},
+  data:() => ({
+    loading: true,
+    categories: [],
+    money: '₴',
+  }),
+  computed: {
+    ...mapGetters(['info']),
+  },
+
+  async mounted() {
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const elems = document.querySelectorAll('.tooltipped');
+      const instances = M.Tooltip.init(elems, {html: category.tooltip});
+      // instances.tooltip()
+    });
+
+    const records = await this.$store.dispatch('fetchRecords')
+   const categories = await this.$store.dispatch('fetchCategories')
+    this.categories = categories.map(category => {
+      const spend = records
+          .filter(record => record.categoryId === category.id)
+          .filter(record => record.type === 'outcome')
+          .reduce((total,record)=>{
+          return  total += +record.amount
+          },0)
+      const percent = 100*spend / category.limit
+      const progressPercent = percent > 100 ? 100 : percent
+      const progressColor = percent < 60
+        ? 'green'
+        : percent < 100
+           ? 'yellow'
+           : 'red'
+      const tooltipValue = category.limit - spend
+      const tooltip =`${tooltipValue < 0 ? 'Excess on' :'remains'} ${Math.abs(tooltipValue)} `
+       return {
+        ...category,
+        progressColor,
+        progressPercent,
+        spend,
+        tooltip
+       }
+    })
+
+    this.loading = false
+  }
+}
+</script>
 
 
 <!--<template>-->

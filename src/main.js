@@ -7,6 +7,7 @@ import 'materialize-css/dist/js/materialize.min'
 import mesPlugin from "@/utils/mesPlugin";
 import Loader from "@/components/AppPractices/Loader";
 import currencyFilter from "@/filters/currencyFilter";
+import tooltipDirective from "@/directives/tooltipDirective";
 import Vue from 'vue'
 // import firebase from "firebase/app"; // v.8 and <
 // import firebase from 'firebase/compat/app'  // v.9 >
@@ -45,7 +46,7 @@ app.config.globalProperties.$filters = {
         return new Intl.DateTimeFormat('uk-UK', options).format(new Date(value))
         // return new Intl.DateTimeFormat('uk-UK').format(new Date(value))
     },
-    currencyFilter (value, currency='UAH') {
+     currencyFilter(value, currency='UAH') {
         return new Intl.NumberFormat('uk-UK', {
             style: 'currency',
             currency
@@ -69,7 +70,7 @@ const analytics = getAnalytics(firebaseApp);
 let appMain
 firebase.auth().onAuthStateChanged(() => {
     if (!appMain) {
-        appMain = app.use('Loader', Loader).use('currency',currencyFilter).use(mesPlugin).use(store).use(router).mount('#app')
+        appMain = app.use('Loader', Loader).use('tooltip',tooltipDirective).use('currency',currencyFilter).use(mesPlugin).use(store).use(router).mount('#app')
     }
 });
 // app.use(mesPlugin).use(store).use(router).mount('#app')
