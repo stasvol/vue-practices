@@ -8,6 +8,7 @@ import mesPlugin from "@/utils/mesPlugin";
 import Loader from "@/components/AppPractices/Loader";
 import currencyFilter from "@/filters/currencyFilter";
 import tooltipDirective from "@/directives/tooltipDirective";
+import Popper from "vue3-popper";
 import Vue from 'vue'
 // import firebase from "firebase/app"; // v.8 and <
 // import firebase from 'firebase/compat/app'  // v.9 >
@@ -69,8 +70,16 @@ const analytics = getAnalytics(firebaseApp);
 // const db = getFirestore(app);
 let appMain
 firebase.auth().onAuthStateChanged(() => {
+    // app.use('message', mesPlugin).use('currency',currencyFilter).directive('tooltip',tooltipDirective).component("Popper", Popper).use(store).use(router).mount('#app')
     if (!appMain) {
-        appMain = app.use('Loader', Loader).use('tooltip',tooltipDirective).use('currency',currencyFilter).use(mesPlugin).use(store).use(router).mount('#app')
+        appMain = app.use('Loader', Loader)
+            .component("Popper", Popper)
+            .directive('tooltip',tooltipDirective)
+            .use('currency',currencyFilter)
+            .use('message', mesPlugin)
+            .use(store)
+            .use(router)
+            .mount('#app')
     }
 });
 // app.use(mesPlugin).use(store).use(router).mount('#app')

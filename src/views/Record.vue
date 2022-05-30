@@ -12,7 +12,6 @@
         Add a new category
       </router-link>
     </h5>
-
     <form class="form" v-else @submit.prevent="onSubmit">
       <div class="input-field" >
 
@@ -142,6 +141,7 @@ export default {
     setTimeout(()=>{
       this.select = M.FormSelect.init(this.$refs.select);
       M.updateTextFields();
+
     },0)
 
   },
@@ -190,7 +190,7 @@ export default {
            this.description = ''
          } catch (e) {}
        } else {
-         M.toast({html: `Not enough money (-${this.amount - this.info.bill})`})
+         M.toast({html: `Not enough money (${this.amount - this.info.bill})`})
        }
    }
   }

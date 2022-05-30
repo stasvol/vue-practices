@@ -37,7 +37,7 @@ export default createStore({
       const res = await fetch('https://api.apilayer.com/fixer/latest?base=EUR&symbols=UAH,USD,EUR', {
         method: 'GET',
         headers: {
-          apikey: 'l1A81VnsCyl10VI8BabFL67G0sv6j8bP',
+          apikey: 'LRI9Mh91f0hnKDEVlpZaGPJ5T1qFCllp',
         }
       })
 //  fetch('https://api.apilayer.com/fixer/latest?base=USD&symbols=EUR,GBP',{

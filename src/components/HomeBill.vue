@@ -10,7 +10,7 @@
             class="currency-line">
           <span>
             {{setCurrency(cur).toFixed(2)}}&nbsp;{{cur}}
-<!--            {{$filters.currencyFilter(cur)}}-->
+<!--            {{$filters.currencyFilter(parseInt(cur))}}-->
 <!--            {{cur.replace('UAH', '₴').replace('USD','$').replace('EUR','€')}}-->
           </span>
 

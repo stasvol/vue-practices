@@ -25,6 +25,7 @@
 import Navbar from '@/components/AppPractices/Navbar'
 import Sidebar from '@/components/AppPractices/Sidebar'
 import Loader from "@/components/AppPractices/Loader";
+import messages from "@/utils/messages";
 export default {
   name: 'main-layout',
   data:() => ({
@@ -37,6 +38,18 @@ async mounted() {
    }
    this.loading = false
  },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch:{
+    error(fbError) {
+      console.log(fbError)
+      // this.$error(messages[fbError.code] || 'Error! User not found.')
+      M.toast({html: `[Error]: ${messages[fbError.code] || 'Error! User not found.'}` })
+    }
+  },
   components: {
     Loader,
     Navbar,Sidebar
