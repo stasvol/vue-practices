@@ -9,6 +9,8 @@ import Loader from "@/components/AppPractices/Loader";
 import currencyFilter from "@/filters/currencyFilter";
 import tooltipDirective from "@/directives/tooltipDirective";
 import Popper from "vue3-popper";
+// import Paginate from 'vuejs-paginate'
+import Paginate from "vuejs-paginate-next";
 import Vue from 'vue'
 // import firebase from "firebase/app"; // v.8 and <
 // import firebase from 'firebase/compat/app'  // v.9 >
@@ -69,10 +71,13 @@ const firebaseApp = firebase.initializeApp ( firebaseConfig );
 const analytics = getAnalytics(firebaseApp);
 // const db = getFirestore(app);
 let appMain
+
 firebase.auth().onAuthStateChanged(() => {
     // app.use('message', mesPlugin).use('currency',currencyFilter).directive('tooltip',tooltipDirective).component("Popper", Popper).use(store).use(router).mount('#app')
     if (!appMain) {
-        appMain = app.use('Loader', Loader)
+        appMain = app
+            .use('Loader', Loader)
+            .component('Paginate', Paginate)
             .component("Popper", Popper)
             .directive('tooltip',tooltipDirective)
             .use('currency',currencyFilter)

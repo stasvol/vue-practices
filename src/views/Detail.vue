@@ -17,7 +17,7 @@
             'green': record.type === 'income'
           }"
           >
-            <div class="card-content white-text">
+            <div class="card-content white-text ">
               <p>Описание: {{record.description}}</p>
               <p>Сумма: {{$filters.currencyFilter(record.amount)}}</p>
               <p>Категория: {{record.categoryName}}</p>

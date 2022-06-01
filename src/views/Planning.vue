@@ -2,16 +2,16 @@
 
   <div>
     <div class="page-title">
-<!--      <a class="btn tooltipped" data-position="top" data-tooltip="I am a tooltip">Hover me!</a>-->
+      <!--      <a class="btn tooltipped" data-position="top" data-tooltip="I am a tooltip">Hover me!</a>-->
       <h3>Планирование</h3>
 
       <h4>
-<!--            {{ info.bill}} {{money}}-->
-        {{$filters.currencyFilter(info.bill)}}
+        <!--            {{ info.bill}} {{money}}-->
+        {{ $filters.currencyFilter(info.bill) }}
 
-        </h4>
+      </h4>
     </div>
-   <Loader v-if="loading" />
+    <Loader v-if="loading"/>
     <h5 class="center" v-else-if="!categories.length">
       Has no categories.
       <router-link to="/categories">
@@ -21,36 +21,52 @@
 
     <section v-else>
       <div v-for="category in categories" :key="category.id">
-        <p>
-          <strong>{{ category.title }} : &nbsp;</strong>
-<!--          {{ category.spend }}{{money}}-->
-          {{$filters.currencyFilter(category.spend )}}
-          из
-<!--          {{ category.limit }}{{money}}-->
-          {{$filters.currencyFilter(category.limit)}}
-        </p>
-<!--        <div-->
-<!--            class="tooltipped"-->
-<!--            data-position="top"-->
-<!--            data-tooltip="This is some extra information in a tooltip placement top">-->
-<!--        > -->
+        <div class="content">
+          <div>
+            <strong>{{ category.title }} : &nbsp;</strong>
+            <!--          {{ category.spend }}{{money}}-->
+            {{ $filters.currencyFilter(category.spend) }}
+            из
+            <!--          {{ category.limit }}{{money}}-->
+            {{ $filters.currencyFilter(category.limit) }}
+          </div>
+          <div>
+            <Popper class="popper">
+              <div class="small">
+                <button class="spinner-green">remains</button>
+              </div>
 
-        <div class="progress tooltipped" v-tooltip = "category.tooltip">
+              <template #content>
+                <div class="popper">{{ category.tooltip }}</div>
+              </template>
+            </Popper>
+          </div>
+        </div>
+
+        <!--        <div-->
+        <!--            class="tooltipped"-->
+        <!--            data-position="top"-->
+        <!--            data-tooltip="This is some extra information in a tooltip placement top">-->
+        <!--        > -->
+
+        <div class="progress tooltipped" v-tooltip="category.tooltip">
 
           <div
               class="determinate"
               :class="[category.progressColor]"
               :style="{width: category.progressPercent + '%'}"
           >
+
           </div>
 
         </div>
-<!--        </div>-->
+
+        <!--        </div>-->
       </div>
       <Popper class="popper">
-        <div>Total amount</div>
+        <button class="btn">Total amount</button>
         <template #content>
-          <div class="popper" >{{$filters.currencyFilter(info.bill)}}</div>
+          <div class="popper">{{ $filters.currencyFilter(info.bill) }}</div>
         </template>
       </Popper>
 
@@ -66,10 +82,11 @@ import Popper from "vue3-popper";
 import category from "@/store/category";
 import currencyFilter from "@/filters/currencyFilter";
 import tooltipDirective from "@/directives/tooltipDirective";
+
 export default {
-  name:'planning',
-  components: {Loader,Popper,},
-  data:() => ({
+  name: 'planning',
+  components: {Loader, Popper,},
+  data: () => ({
     loading: true,
     categories: [],
     money: '₴',
@@ -78,22 +95,22 @@ export default {
     ...mapGetters(['info']),
   },
 
-  async updated() {
-    document.addEventListener('DOMContentLoaded',setTimeout( async function () {
-      const el = await document.querySelectorAll('.tooltipped');
-      const instances = await M.Tooltip.init(el,{html: '', position: 'top'})
-      // const instances = M.Tooltip.getInstance(el)
-      // instances.open()
-    },50))
-  },
+  // async updated() {
+  //   document.addEventListener('DOMContentLoaded',setTimeout( async function () {
+  //     const el = await document.querySelectorAll('.tooltipped');
+  //     const instances = await M.Tooltip.init(el,{html: '', position: 'top'})
+  //     // const instances = M.Tooltip.getInstance(el)
+  //     // instances.open()
+  //   },50))
+  // },
 
 
   async mounted() {
-   // document.addEventListener('DOMContentLoaded',async function() {
-   //      const elems = await document.querySelectorAll('.tooltipped');
-   //      const instances = await  M.Tooltip.init(elems, {html: `${category.tooltip}`})
-   //   // nextTick()
-   //  })
+    // document.addEventListener('DOMContentLoaded',async function() {
+    //      const elems = await document.querySelectorAll('.tooltipped');
+    //      const instances = await  M.Tooltip.init(elems, {html: `${category.tooltip}`})
+    //   // nextTick()
+    //  })
 
     const records = await this.$store.dispatch('fetchRecords')
     const categories = await this.$store.dispatch('fetchCategories')
@@ -101,26 +118,26 @@ export default {
       const spend = records
           .filter(record => record.categoryId === category.id)
           .filter(record => record.type === 'outcome')
-          .reduce((total,record)=>{
-          return  total += +record.amount
-          },0)
-      const percent = 100*spend / category.limit
+          .reduce((total, record) => {
+            return total += +record.amount
+          }, 0)
+      const percent = 100 * spend / category.limit
       const progressPercent = percent > 100 ? 100 : percent
       const progressColor = percent < 60
-        ? 'green'
-        : percent < 100
-           ? 'yellow'
-           : 'red'
+          ? 'green'
+          : percent < 100
+              ? 'yellow'
+              : 'red'
       const tooltipValue = category.limit - spend
-      const tooltip =`${tooltipValue < 0 ? 'Excess on' :'remains'} ${currencyFilter(Math.abs(tooltipValue))} `
+      const tooltip = `${tooltipValue < 0 ? 'Excess on' : 'remains'} ${currencyFilter(Math.abs(tooltipValue))} `
 
-       return {
+      return {
         ...category,
         progressColor,
         progressPercent,
         spend,
         tooltip
-       }
+      }
     })
 
     this.loading = false
@@ -129,12 +146,20 @@ export default {
 }
 </script>
 <style>
-.popper {
-  border: solid 1px #343333;
-  background: #313130;
-  padding: 5px;
-  color:#e8e7e0;
-  border-radius: 5px;
+/*.popper {*/
+/*  border: solid 1px #343333;*/
+/*  background: #313130;*/
+/*  padding: 10px;*/
+/*  color: #e8e7e0;*/
+/*  border-radius: 10px;*/
+/*  cursor: pointer;*/
+/*}*/
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+.spinner-green {
+  border-radius: 10px;
   cursor: pointer;
 }
 </style>
