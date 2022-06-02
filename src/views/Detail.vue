@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <canvas id="myChart" width="400" height="400"></canvas>
   </div>
 </template>
 <script>
@@ -40,6 +41,7 @@ export default {
     record: null,
     // category: null
   }),
+
   async mounted() {
     const id = this.$route.params.id
     const record = await this.$store.dispatch('fetchRecordById', id)
@@ -47,6 +49,7 @@ export default {
     this.record = {
      ...record,
       categoryName: category.title,
+
     }
     this.loading = false
   }

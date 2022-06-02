@@ -37,7 +37,7 @@
               </div>
 
               <template #content>
-                <div class="popper">{{ category.tooltip }}</div>
+                <div class="popper">{{ category.title }}: {{ category.tooltip }}</div>
               </template>
             </Popper>
           </div>
@@ -66,7 +66,7 @@
       <Popper class="popper">
         <button class="btn">Total amount</button>
         <template #content>
-          <div class="popper">{{ $filters.currencyFilter(info.bill) }}</div>
+          <div class="popper">{{info.name}}:&nbsp;{{ $filters.currencyFilter(info.bill) }}</div>
         </template>
       </Popper>
 
@@ -146,14 +146,30 @@ export default {
 }
 </script>
 <style>
-/*.popper {*/
-/*  border: solid 1px #343333;*/
-/*  background: #313130;*/
-/*  padding: 10px;*/
-/*  color: #e8e7e0;*/
-/*  border-radius: 10px;*/
-/*  cursor: pointer;*/
-/*}*/
+.popper {
+  border: solid 1px #343333;
+  background: linear-gradient( #4b4c4d, #262526) ;
+  padding: 10px;
+  color: #f6f6ea;
+  border-radius: 10px;
+  cursor: pointer;
+  animation-duration: 3s;
+  animation-name: slidein;
+  /*transform: translate(0);*/
+}
+@keyframes slidein {
+  from {
+    margin-top: 100%;
+    width: 26%;
+
+  }
+
+  to {
+    margin-top: 0%;
+    width: 50%;
+    display: none;
+  }
+}
 .content {
   display: flex;
   justify-content: space-between;
