@@ -1,0 +1,28 @@
+{
+  "ProfileTitle" : "Профіль",
+  "Name" : "Ім'я",
+  "Update" : "Оновити",
+  "Sidebar_Bill": "Рахунок",
+  "Sidebar_History": "Історія",
+  "Sidebar_Planning": "Планування",
+  "Sidebar_NewRecord": "Новий запис",
+  "Sidebar_Categories": "Категорії",
+  "Category_Create": "Створити",
+  "Category_Name": "Назва",
+  "Category_Limit": "Ліміт",
+  "Category_Edit": "Редагувати",
+  "Category_SelectCategory": "Оберіть категорію",
+  "Currency_ExchangeRates": "Курс валют",
+  "Currency_Currency": "Валюта",
+  "Currency_Well": "Курс",
+  "Currency_Date": "Дата",
+  "Currency_CurrencyAccount": "Рахунок у валюті",
+  "Currency_Account": "Рахунок",
+  "History_RecordingHistory": "Історія записів",
+  "History_Category": "Категорія",
+  "History_Sum": "Сума",
+  "History_Open": "Відкрити",
+  "History_Type": "Тип"
+
+
+}

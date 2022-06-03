@@ -3,11 +3,11 @@
     <thead>
     <tr>
       <th>#</th>
-      <th>Сумма</th>
-      <th>Дата</th>
-      <th>Категория</th>
-      <th>Тип</th>
-      <th>Открыть</th>
+      <th>{{$filters.localiseFilter('History_Sum')}}</th>
+      <th>{{$filters.localiseFilter('Currency_Date')}}</th>
+      <th>{{$filters.localiseFilter('History_Category')}}</th>
+      <th>{{$filters.localiseFilter('History_Type')}}</th>
+      <th>{{$filters.localiseFilter('History_Open')}}</th>
     </tr>
     </thead>
 

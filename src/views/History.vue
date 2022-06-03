@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{$filters.localiseFilter('History_RecordingHistory')}}</h3>
     </div>
 
     <div class="history-chart">
@@ -49,6 +49,7 @@ import Loader from "@/components/AppPractices/Loader";
 import paginationMixin from "@/mixins/paginationMixin";
 import {Pie} from "vue-chartjs";
 import {Chart} from "chart.js";
+import localiseFilter from '@/filters/localiseFilter'
 
 export default {
   name: 'history',

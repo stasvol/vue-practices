@@ -31,15 +31,16 @@
   </ul>
 </template>
 <script>
+import localiseFilter from '@/filters/localiseFilter'
 export default {
   props:[`value`],
   data:() => ({
     links: [
-      {title: 'Счет', path: '/', exact: true},
-      {title: 'История', path: '/history'},
-      {title: 'Планирование', path: '/planning'},
-      {title: 'Новая запис', path: '/record'},
-      {title: 'Категории', path: '/categories'},
+      {title: localiseFilter('Sidebar_Bill'), path: '/', exact: true},
+      {title: localiseFilter('Sidebar_History'), path: '/history'},
+      {title: localiseFilter('Sidebar_Planning'), path: '/planning'},
+      {title: localiseFilter('Sidebar_NewRecord'), path: '/record'},
+      {title: localiseFilter('Sidebar_Categories'), path: '/categories'},
     ],
   })
 }

@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h4>{{ $filters.localiseFilter('Category_Create') }}</h4>
       </div>
 
       <form @submit.prevent ="onSubmit">
@@ -13,7 +13,7 @@
               id="name"
               type="text"
           >
-          <label for="name">Название</label>
+          <label for="name">{{ $filters.localiseFilter('Category_Name') }}</label>
           <span
               v-if="v$.title.$error"
               class="helper-text invalid"
@@ -29,7 +29,7 @@
               id="limit"
               type="number"
           >
-          <label for="limit">Лимит</label>
+          <label for="limit">{{ $filters.localiseFilter('Category_Limit') }}</label>
           <span
               v-if="v$.limit.$error"
               class="helper-text invalid"
@@ -50,7 +50,7 @@
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Создать
+          {{ $filters.localiseFilter('Category_Create') }}
           <i class="material-icons right">send</i>
         </button>
       </form>

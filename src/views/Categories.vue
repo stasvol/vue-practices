@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>{{ $filters.localiseFilter("Sidebar_Categories") }}</h3>
     </div>
     <section>
       <Loader v-if="loading" />

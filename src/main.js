@@ -23,6 +23,9 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 // import 'firebase/auth';
 import { initializeApp } from "firebase/app";
 import {values} from "core-js/stable/dom-collections";
+import localiseFilter from "@/filters/localiseFilter";
+import uk from '../src/locales/uk.json'
+import en from '../src/locales/en.json'
 
 
 const app = createApp(App)
@@ -46,7 +49,8 @@ app.config.globalProperties.$filters = {
         //     options.minute = '2-digit'
         //     options.second = '2-digit'
         // }
-        return new Intl.DateTimeFormat('uk-UK', options).format(new Date(value))
+        const locale = store.getters.info.locale || 'uk-UK'
+        return new Intl.DateTimeFormat(locale, options).format(new Date(value))
         // return new Intl.DateTimeFormat('uk-UK').format(new Date(value))
     },
      currencyFilter(value, currency='UAH') {
@@ -54,6 +58,16 @@ app.config.globalProperties.$filters = {
             style: 'currency',
             currency
         }).format(value)
+    },
+
+
+    localiseFilter (key) {
+        const locales = {
+            'uk-UK': uk,
+            'en-US': en
+        }
+        const locale = store.getters.info.locale || 'uk-UK'
+        return locales[locale][key] || `[Localise error]: key ${key} not found`
     }
 }
 
@@ -81,6 +95,7 @@ firebase.auth().onAuthStateChanged(() => {
             .component("Popper", Popper)
             .directive('tooltip',tooltipDirective)
             .use('currency',currencyFilter)
+            .use('locale', localiseFilter)
             .use('message', mesPlugin)
             .use(store)
             .use(router)
