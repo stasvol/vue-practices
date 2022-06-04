@@ -22,7 +22,15 @@
   "History_Category": "Категорія",
   "History_Sum": "Сума",
   "History_Open": "Відкрити",
-  "History_Type": "Тип"
+  "History_Type": "Тип",
+  "Planning_Title": "Планування",
+  "Currency_Name": "грн",
+  "Description" : "Опис",
+  "Sum": "Сума",
+  "Income": "Дохід",
+  "Expenses": "Розхід",
+  "Button_TotalAmount": "Загальна сума",
+  "Button_Remains": "Залишилося"
 
 
 }

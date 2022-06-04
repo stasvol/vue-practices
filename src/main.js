@@ -26,6 +26,8 @@ import {values} from "core-js/stable/dom-collections";
 import localiseFilter from "@/filters/localiseFilter";
 import uk from '../src/locales/uk.json'
 import en from '../src/locales/en.json'
+import VueMeta from 'vue-meta'
+import { createMetaManager } from 'vue-meta'
 
 
 const app = createApp(App)
@@ -89,7 +91,9 @@ let appMain
 firebase.auth().onAuthStateChanged(() => {
     // app.use('message', mesPlugin).use('currency',currencyFilter).directive('tooltip',tooltipDirective).component("Popper", Popper).use(store).use(router).mount('#app')
     if (!appMain) {
+
         appMain = app
+            .use(createMetaManager())
             .use('Loader', Loader)
             .component('Paginate', Paginate)
             .component("Popper", Popper)

@@ -22,5 +22,13 @@
   "History_Category": "Category",
   "History_Sum": "Sum",
   "History_Open": "Open",
-  "History_Type": "Type"
+  "History_Type": "Type",
+  "Planning_Title": "Planning",
+  "Currency_Name": "UAH",
+  "Description" : "Description",
+  "Sum": "Sum",
+  "Income": "Income",
+  "Expenses": "Expenses",
+  "Button_TotalAmount": "Total amount",
+  "Button_Remains": "Remains"
 }

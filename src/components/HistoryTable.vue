@@ -37,7 +37,7 @@
 <script>
 export default {
   async mounted() {
-    document.addEventListener('DOMContentLoaded',setTimeout( async function () {
+    document.addEventListener('DOMContentLoaded', setTimeout( async function () {
       const el = await document.querySelectorAll('.tooltipped');
       const instances = await M.Tooltip.init(el,{html: 'See record', position: 'top'})
       // const instances = M.Tooltip.getInstance(el)
@@ -53,3 +53,8 @@ export default {
  }
 }
 </script>
+<style>
+span.badge {
+  min-width: 5rem;
+}
+</style>
