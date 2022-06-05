@@ -83,6 +83,7 @@ import category from "@/store/category";
 import currencyFilter from "@/filters/currencyFilter";
 import tooltipDirective from "@/directives/tooltipDirective";
 import localiseFilter from "@/filters/localiseFilter";
+import {useMeta} from "vue-meta";
 
 export default {
   name: 'planning',
@@ -92,6 +93,9 @@ export default {
     categories: [],
     money: '₴',
   }),
+  setup () {
+    useMeta({ title: localiseFilter('Sidebar_Planning') })
+  },
   computed: {
     ...mapGetters(['info']),
   },

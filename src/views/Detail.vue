@@ -33,8 +33,14 @@
 </template>
 <script>
 import Loader from "@/components/AppPractices/Loader";
+import {useMeta} from "vue-meta";
+import localiseFilter from "@/filters/localiseFilter";
+import useVuelidate from "@vuelidate/core";
 export default {
   name:'detail',
+  setup () {
+    useMeta({ title: localiseFilter('Details_Title') })
+  },
   components: {Loader},
   data:() => ({
     loading: true,

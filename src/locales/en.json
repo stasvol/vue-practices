@@ -30,5 +30,13 @@
   "Income": "Income",
   "Expenses": "Expenses",
   "Button_TotalAmount": "Total amount",
-  "Button_Remains": "Remains"
+  "Button_Remains": "Remains",
+  "Details_Title": "Details",
+  "Login_Title": "Login",
+  "Home_Bookkeeping_Title": "Home bookkeeping",
+  "No_Account": " No account",
+  "Register_Title": "Register",
+  "Record_Title": "Record",
+  "I_agree_with_the_rules": "I agree with the rules",
+  "Already_have_an_account": "Already have an account"
 }

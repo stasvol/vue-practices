@@ -28,6 +28,7 @@ import uk from '../src/locales/uk.json'
 import en from '../src/locales/en.json'
 import VueMeta from 'vue-meta'
 import { createMetaManager } from 'vue-meta'
+import titlePlugin from "@/utils/titlePlugin";
 
 
 const app = createApp(App)
@@ -94,6 +95,7 @@ firebase.auth().onAuthStateChanged(() => {
 
         appMain = app
             .use(createMetaManager())
+            .use(titlePlugin)
             .use('Loader', Loader)
             .component('Paginate', Paginate)
             .component("Popper", Popper)

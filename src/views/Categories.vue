@@ -26,8 +26,13 @@
 import CategoryCreate from '@/components/CategoryCreate'
 import CategoryEdit from '@/components/CategoryEdit'
 import Loader from "@/components/AppPractices/Loader";
+import {useMeta} from "vue-meta";
+import localiseFilter from "@/filters/localiseFilter";
 export default {
   name:'categories',
+  setup () {
+    useMeta({ title: localiseFilter('Sidebar_Categories') })
+  },
   data:() => ({
     categories: [],
     loading: true,

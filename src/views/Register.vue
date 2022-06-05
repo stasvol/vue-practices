@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">{{$filters.localiseFilter('Home_Bookkeeping_Title')}}</span>
       <div class="input-field">
         <input
             id="email"
@@ -23,7 +23,7 @@
             class="validate"
             v-model.trim="password"
         >
-        <label for="password">Пароль</label>
+        <label for="password">Password</label>
         <small
             class="helper-text invalid"
             v-if="v$.password.$error">
@@ -37,7 +37,7 @@
             class="validate"
             v-model.trim="name"
         >
-        <label for="name">Имя</label>
+        <label for="name">{{$filters.localiseFilter('Name')}}</label>
         <small
             class="helper-text invalid"
             v-if="v$.name.$error"
@@ -51,7 +51,7 @@
               type="checkbox"
               v-model.trim="agree"
           />
-          <span>С правилами согласен</span>
+          <span>{{$filters.localiseFilter('I_agree_with_the_rules')}}</span>
 
         </label>
           <i
@@ -81,13 +81,13 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Зарегистрироваться
+          {{$filters.localiseFilter('Register_Title')}}
           <i class="material-icons right">send</i>
         </button>
       </div>
       <p class="center">
-        Уже есть аккаунт?
-        <router-link to="/login">Войти!</router-link>
+        {{$filters.localiseFilter('Already_have_an_account')}}?
+        <router-link to="/login">{{$filters.localiseFilter('Login_Title')}}!</router-link>
       </p>
     </div>
   </form>
@@ -95,10 +95,13 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import {email, minLength, required} from "@vuelidate/validators";
+import {useMeta} from "vue-meta";
+import localiseFilter from "@/filters/localiseFilter";
 
 export default {
   name: 'register',
   setup () {
+    useMeta({ title: localiseFilter('Register_Title') })
     return { v$: useVuelidate() }
   },
   data:() => ({

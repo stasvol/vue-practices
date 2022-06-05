@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">{{$filters.localiseFilter('Home_Bookkeeping_Title')}}</span>
       <div class="input-field">
         <input
             id="email"
@@ -26,7 +26,7 @@
             class="validate"
             v-model.trim="password"
         >
-        <label for="password">Пароль</label>
+        <label for="password">Password</label>
         <small
             class="helper-text invalid"
             v-if="v$.password.$error"
@@ -58,14 +58,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Войти
+          {{$filters.localiseFilter('Login_Title')}}
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Нет аккаунта?
-        <router-link to="/register">Зарегистрироваться</router-link>
+        {{$filters.localiseFilter('No_Account')}}?
+        <router-link to="/register">{{$filters.localiseFilter('Register_Title')}}</router-link>
       </p>
     </div>
   </form>
@@ -75,27 +75,34 @@
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import messages from "@/utils/messages";
+import {useMeta} from "vue-meta";
+import localiseFilter from "@/filters/localiseFilter";
 export default {
   name: 'login',
   setup () {
+    useMeta({ title: localiseFilter('Login_Title') })
     return { v$: useVuelidate() }
   },
+
   data: () => ({
     email: '',
     password: '',
     // v$: useVuelidate()
   }),
+
   validations() {
      return {
          email: {required, email},
          password: {required, minLength: minLength(6)},
        }
   },
+
    mounted() {
     if (messages[this.$route.query.message]) {
       M.toast({html: messages[this.$route.query.message]})
     }
    },
+
   methods: {
    async onSubmit() {
       if (this.v$.$invalid) {

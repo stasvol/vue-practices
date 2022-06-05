@@ -42,7 +42,7 @@
           <strong>{{ error.$message }}</strong>
         </i>
       </div>
-      <button class="btn waves-effect waves-light" type="submit">
+      <button @click="update" class="btn waves-effect waves-light" type="submit">
         {{ $filters.localiseFilter('Update')}}
         <i class="material-icons right">send</i>
       </button>
@@ -58,16 +58,17 @@ import localiseFilter from "@/filters/localiseFilter";
 
 export default {
   name: 'profile',
-  metaInfo() {
-   return  {title: 'Profile'}
-  },
+  // metaInfo() {
+  //  return  {title: 'Profile'}
+  // },
    setup () {
-   let meta =  useMeta({ title: localiseFilter('ProfileTitle') })
+    useMeta({ title: localiseFilter('ProfileTitle') })
+
     return {
       v$:  useVuelidate(),
-      meta
-  }
+    }
   },
+
   validations() {
     return {
       name:{required}
@@ -100,8 +101,11 @@ export default {
            locale: this.isUkLocale ? 'uk-UK' : 'en-US'
          })
       } catch (e){}
+    },
+    update() {
+     this.$forceUpdate()
     }
-  }
+  },
 }
 
 </script>

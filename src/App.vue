@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <metainfo>
-      <template v-slot:title="{ content }">{{ content ? `${content}` : `SITE_NAME` }}</template>
+      <template v-slot:title="{ content }">{{ content ? `${content} | CRM` : `SITE_NAME` }}</template>
 <!--      <template v-slot:title="{ content }">{{ content ? `${content} | SITE_NAME` : `SITE_NAME` }}</template>-->
     </metainfo>
-    <component :is="layout">
-      <router-view/>
+    <component :is="layout" >
+      <router-view :key="$route.fullPath"/>
     </component>
   </div>
 <!--  <nav>-->
@@ -17,13 +17,16 @@
 import AuthLayout from './layouts/AuthLayout'
 import MainLayout from './layouts/MainLayout'
 import {useMeta} from "vue-meta";
+
 export default {
   setup () {
-    useMeta({
+   useMeta({
       title: '',
       htmlAttrs: { lang: 'en',  amp: true }
+
     })
   },
+
   computed: {
     layout() {
       // console.log(this.$route.meta)

@@ -30,7 +30,15 @@
   "Income": "Дохід",
   "Expenses": "Розхід",
   "Button_TotalAmount": "Загальна сума",
-  "Button_Remains": "Залишилося"
+  "Button_Remains": "Залишилося",
+  "Details_Title": "Деталі",
+  "Login_Title": "Війти",
+  "Home_Bookkeeping_Title": "Домашня бухгалтерія",
+  "No_Account": " Немає акаунта",
+  "Register_Title": "Зареєструватись",
+  "Record_Title": "Запис",
+  "I_agree_with_the_rules": "Я згоден з правилами",
+  "Already_have_an_account": "Вже є обліковий запис"
 
 
 }

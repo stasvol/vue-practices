@@ -108,6 +108,8 @@ import Loader from "@/components/AppPractices/Loader";
 import useVuelidate from "@vuelidate/core";
 import {minValue, required} from "@vuelidate/validators";
 import {mapGetters} from "vuex";
+import {useMeta} from "vue-meta";
+import localiseFilter from "@/filters/localiseFilter";
 export default {
   name: 'record',
   components: {Loader},
@@ -123,6 +125,7 @@ export default {
   }),
 
   setup () {
+    useMeta({ title: localiseFilter('Record_Title') })
     return { v$: useVuelidate() }
   },
   validations() {

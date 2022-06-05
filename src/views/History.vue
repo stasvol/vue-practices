@@ -50,11 +50,16 @@ import paginationMixin from "@/mixins/paginationMixin";
 import {Pie} from "vue-chartjs";
 import {Chart} from "chart.js";
 import localiseFilter from '@/filters/localiseFilter'
+import {useMeta} from "vue-meta";
 
 export default {
   name: 'history',
   mixins: [paginationMixin],
   extends: Pie,
+
+  setup () {
+    useMeta({ title: localiseFilter('Sidebar_History') })
+  },
   data:() => ({
     loading: true,
     records: [],
