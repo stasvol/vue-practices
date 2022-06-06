@@ -1,5 +1,7 @@
 
 export default {
+    // logout: 'Logout',
+    // login:'Login',
     'logout' : 'You are logged out',
     'login'  : 'System log in first ',
     'auth/user-not-found': 'There is no user record corresponding to this email and password' ,

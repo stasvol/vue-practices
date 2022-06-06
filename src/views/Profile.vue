@@ -59,14 +59,13 @@ import localiseFilter from "@/filters/localiseFilter";
 export default {
   name: 'profile',
   // metaInfo() {
-  //  return  {title: 'Profile'}
+  //  return  {title: localiseFilter('ProfileTitle') }
   // },
-   setup () {
-    useMeta({ title: localiseFilter('ProfileTitle') })
-
-    return {
+  setup () {
+     useMeta({ title: localiseFilter('ProfileTitle') })
+     return {
       v$:  useVuelidate(),
-    }
+     }
   },
 
   validations() {
@@ -74,10 +73,12 @@ export default {
       name:{required}
     }
   },
+
   data:() =>({
     name: '',
     isUkLocale: true,
   }),
+
   mounted() {
     this.name = this.info.name
     this.isUkLocale = this.info.locale === 'uk-UK'
@@ -85,9 +86,11 @@ export default {
       M.updateTextFields()
     })
   },
+
   computed: {
    ...mapGetters(['info'])
   },
+
   methods: {
     ...mapActions(['updateInfo']),
    async onSubmit() {
@@ -102,10 +105,12 @@ export default {
          })
       } catch (e){}
     },
+
     update() {
      this.$forceUpdate()
     }
   },
+
 }
 
 </script>

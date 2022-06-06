@@ -37,7 +37,7 @@
             class="validate"
             v-model.trim="name"
         >
-        <label for="name">{{$filters.localiseFilter('Name')}}</label>
+        <label for="name">Name</label>
         <small
             class="helper-text invalid"
             v-if="v$.name.$error"

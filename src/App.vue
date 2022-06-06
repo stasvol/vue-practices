@@ -5,7 +5,7 @@
 <!--      <template v-slot:title="{ content }">{{ content ? `${content} | SITE_NAME` : `SITE_NAME` }}</template>-->
     </metainfo>
     <component :is="layout" >
-      <router-view :key="$route.fullPath"/>
+      <router-view :key="$route.path"/>
     </component>
   </div>
 <!--  <nav>-->

@@ -79,16 +79,16 @@ import {useMeta} from "vue-meta";
 import localiseFilter from "@/filters/localiseFilter";
 export default {
   name: 'login',
-  setup () {
-    useMeta({ title: localiseFilter('Login_Title') })
-    return { v$: useVuelidate() }
-  },
 
   data: () => ({
     email: '',
     password: '',
-    // v$: useVuelidate()
   }),
+
+  setup () {
+    useMeta({ title: localiseFilter('Login_Title') })
+    return { v$: useVuelidate() }
+  },
 
   validations() {
      return {

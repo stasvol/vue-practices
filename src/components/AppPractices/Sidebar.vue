@@ -56,11 +56,11 @@ a  .waves-effect {
  .active  a {
   background: #e8e7e0;
 }
- .nodOpen ul {
-   display: none !important;
- }
- .hasOpen ul {
-   display: block !important;
- }
+ /*.nodOpen ul {*/
+ /*  display: none !important;*/
+ /*}*/
+ /*.hasOpen ul {*/
+ /*  display: block !important;*/
+ /*}*/
 
 </style>

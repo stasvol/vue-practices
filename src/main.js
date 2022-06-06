@@ -89,7 +89,7 @@ const analytics = getAnalytics(firebaseApp);
 // const db = getFirestore(app);
 let appMain
 
-firebase.auth().onAuthStateChanged(() => {
+firebase.auth().onAuthStateChanged(async () => {
     // app.use('message', mesPlugin).use('currency',currencyFilter).directive('tooltip',tooltipDirective).component("Popper", Popper).use(store).use(router).mount('#app')
     if (!appMain) {
 

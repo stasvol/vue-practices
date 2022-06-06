@@ -31,7 +31,7 @@ import localiseFilter from "@/filters/localiseFilter";
 export default {
   name:'categories',
   setup () {
-    useMeta({ title: localiseFilter('Sidebar_Categories') })
+    useMeta({title: localiseFilter('Sidebar_Categories') })
   },
   data:() => ({
     categories: [],

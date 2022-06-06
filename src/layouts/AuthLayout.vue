@@ -14,7 +14,6 @@ export default {
   },
   watch:{
     error(fbError) {
-      console.log(fbError)
       // this.$error(messages[fbError.code] || 'Error! User not found.')
       M.toast({html: `[Error]: ${messages[fbError.code] || 'Error! User not found.'}` })
     }
