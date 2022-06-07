@@ -77,6 +77,7 @@ import { required, email, minLength } from '@vuelidate/validators'
 import messages from "@/utils/messages";
 import {useMeta} from "vue-meta";
 import localiseFilter from "@/filters/localiseFilter";
+import mapGetters from "vuex";
 export default {
   name: 'login',
 
@@ -85,42 +86,42 @@ export default {
     password: '',
   }),
 
-  setup () {
-    useMeta({ title: localiseFilter('Login_Title') })
-    return { v$: useVuelidate() }
+  setup() {
+    useMeta({title: localiseFilter('Login_Title')})
+    return {v$: useVuelidate()}
   },
 
   validations() {
-     return {
-         email: {required, email},
-         password: {required, minLength: minLength(6)},
-       }
+    return {
+      email: {required, email},
+      password: {required, minLength: minLength(6)},
+    }
   },
 
-   mounted() {
+  mounted() {
     if (messages[this.$route.query.message]) {
       M.toast({html: messages[this.$route.query.message]})
     }
-   },
+  },
 
   methods: {
-   async onSubmit() {
+    async onSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch()
         return
       }
-     const formData = {
-         email: this.email,
-         password: this.password
+      const formData = {
+        email: this.email,
+        password: this.password
       }
       try {
         await this.$store.dispatch('login', formData)
-        await this.$router.push('/')
-      } catch (e) {
+        await this.$store.dispatch('updateInfo')
+        console.log(this.$store.getters.info.locale)
+        // await this.$router.push('/')
+      } catch (e) {}
 
-      }
-
-    }
+    },
   },
 }
 </script>

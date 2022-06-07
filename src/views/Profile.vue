@@ -58,9 +58,9 @@ import localiseFilter from "@/filters/localiseFilter";
 
 export default {
   name: 'profile',
-  // metaInfo() {
-  //  return  {title: localiseFilter('ProfileTitle') }
-  // },
+  metaInfo() {
+   return  {title: localiseFilter('ProfileTitle') }
+  },
   setup () {
      useMeta({ title: localiseFilter('ProfileTitle') })
      return {

@@ -1,16 +1,22 @@
 // import firebase from "firebase/app";
 import firebase from 'firebase/compat/app'
+import mapGetters from "vuex";
 
 export default {
     actions: {
         async login({dispatch, commit}, {email, password}) {
             try {
                 await firebase.auth().signInWithEmailAndPassword(email, password)
+                await dispatch('getInfo')
+                // const uid = await dispatch('getUid')
+                // const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val()
+                // commit('setInfo', info)
 
             } catch (e) {
                 commit("setError",e)
                 throw e
             }
+
         },
         async register({dispatch, commit}, {email, password, name}) {
             try {
@@ -20,6 +26,7 @@ export default {
                     bill: 10000,
                     name
                 })
+                await dispatch('getInfo')
             } catch (e) {
                 commit("setError",e)
                 throw e

@@ -7,7 +7,8 @@
 
     <Sidebar v-model="isOpen" :key="locale" />
 
-    <main class="app-content" :class="{full: !isOpen}">
+    <main class="app-content" >
+<!--          :class="{full: !isOpen}">-->
 
       <div class="app-page">
 
@@ -28,6 +29,7 @@ import Sidebar from '@/components/AppPractices/Sidebar'
 import Loader from "@/components/AppPractices/Loader";
 import messages from "@/utils/messages";
 import {useMeta} from "vue-meta";
+import mapGetters from "vuex";
 export default {
   name: 'main-layout',
 
@@ -50,6 +52,7 @@ async mounted() {
 
     locale() {
       return this.$store.getters.info.locale
+
     }
   },
 
