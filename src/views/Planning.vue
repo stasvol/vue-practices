@@ -158,7 +158,7 @@ export default {
   color: #f6f6ea;
   border-radius: 10px;
   cursor: pointer;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-name: slidein;
   /*transform: translate(0);*/
 }

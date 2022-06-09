@@ -55,7 +55,7 @@ export default {
     // toggle: true
   }),
   // template: `
-  //   <ul v-model="value">
+  //   <Sidebar v-model="value">
   // `,
   computed: {
     value: {

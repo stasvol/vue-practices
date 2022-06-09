@@ -119,7 +119,7 @@ export default {
         await this.$store.dispatch('login', formData)
         await this.$store.dispatch('getInfo')
         console.log(this.$store.getters.info.locale)
-        // await this.$router.push('/')
+        await this.$router.push('/')
       } catch (e) {}
 
     },

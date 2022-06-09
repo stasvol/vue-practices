@@ -32,7 +32,6 @@ export default createStore({
      //      .then(response => response.text())
      //      .then(result => console.log(result))
      //      .catch(error => console.log('error', error));
-
      //const key = process.env.VUE_APP_FIXER
       const res = await fetch('https://api.apilayer.com/fixer/latest?base=EUR&symbols=UAH,USD,EUR', {
         method: 'GET',
