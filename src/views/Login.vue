@@ -57,6 +57,7 @@
         <button
             class="btn waves-effect waves-light auth-submit"
             type="submit"
+
         >
           {{$filters.localiseFilter('Login_Title')}}
           <i class="material-icons right">send</i>
@@ -116,7 +117,7 @@ export default {
       }
       try {
         await this.$store.dispatch('login', formData)
-        await this.$store.dispatch('updateInfo')
+        await this.$store.dispatch('getInfo')
         console.log(this.$store.getters.info.locale)
         // await this.$router.push('/')
       } catch (e) {}

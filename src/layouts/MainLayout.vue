@@ -5,9 +5,10 @@
 
     <Navbar @click="isOpen = !isOpen" :key="locale"  />
 
-    <Sidebar v-model="isOpen" :key="locale" />
+    <Sidebar  :key="locale" :modelValue="isOpen"
+             @update:modelValue="isOpen = $event" />
 
-    <main class="app-content" >
+    <main class="app-content" :class="{full: !isOpen}" >
 <!--          :class="{full: !isOpen}">-->
 
       <div class="app-page">

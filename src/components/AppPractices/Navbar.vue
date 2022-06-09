@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar orange lighten-1">
-    <div class="nav-wrapper">
+  <nav  class="navbar orange lighten-1">
+    <div class="nav-wrapper" @click.stop>
       <div class="navbar-left" >
-        <a href="#" @click.stop.prevent ="$emit('click')">
+        <a href="#" @click.stop ="$emit('click')">
           <i class="material-icons black-text">dehaze</i>
         </a>
         <span class="black-text">{{ $filters.dateFilter(date) }}</span>
@@ -10,7 +10,7 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a
+          <a  @click.stop.prevent
               class="dropdown-trigger black-text"
               href="#"
               data-target="dropdown"
@@ -22,13 +22,13 @@
 
           <ul id='dropdown' class='dropdown-content'>
             <li>
-              <router-link to="/profile" class="black-text">
+              <router-link @click.stop to="/profile" class="black-text">
                 <i class="material-icons">account_circle</i>Профиль
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text" @click.prevent="logout">
+              <a href="#" class="black-text" @click.stop="logout">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>

@@ -1,5 +1,5 @@
 <template >
-  <ul class="sidenav app-sidenav " :class="{open: !value}">
+  <ul class="sidenav app-sidenav "  :class="{open: modelValue} ">
 <!--      :class="['open', {value}]"-->
 <!--    :class="{open: value}"-->
     <router-link
@@ -10,8 +10,15 @@
       tag="li"
       :exact="link.exact"
     >
-      <a href="#" class="waves-effect waves-orange pointer">{{ link.title.toUpperCase() }}</a>
+
+      <a href="#" class="waves-effect waves-orange pointer" >{{ link.title.toUpperCase() }}</a>
+
     </router-link>
+<!--    <li :class="toggle ? 'show' : 'hide' ">example1</li>-->
+<!--    <li :class="toggle ? 'show' : 'hide' ">example2</li>-->
+<!--    <li :class="toggle ? 'show' : 'hide' ">example3</li>-->
+<!--    <li :class="toggle ? 'show' : 'hide' ">example4</li>-->
+<!--    <button @click="toggle = !toggle">chow</button>-->
 
 <!--    <li>-->
 <!--      <a href="#" class="waves-effect waves-orange pointer">Счет</a>-->
@@ -33,7 +40,10 @@
 <script>
 import localiseFilter from '@/filters/localiseFilter'
 export default {
-  props:[`value`],
+  // props:['value'],
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+
   data:() => ({
     links: [
       {title: localiseFilter('Sidebar_Bill'), path: '/', exact: true},
@@ -42,7 +52,21 @@ export default {
       {title: localiseFilter('Sidebar_NewRecord'), path: '/record'},
       {title: localiseFilter('Sidebar_Categories'), path: '/categories'},
     ],
-  })
+    // toggle: true
+  }),
+  // template: `
+  //   <ul v-model="value">
+  // `,
+  computed: {
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit('update:modelValue', value)
+      }
+    }
+  }
 }
 </script>
 <style scoped>
@@ -55,6 +79,9 @@ a  .waves-effect {
 }
  .active  a {
   background: #e8e7e0;
+}
+.show {
+  display: block;
 }
  /*.nodOpen ul {*/
  /*  display: none !important;*/
