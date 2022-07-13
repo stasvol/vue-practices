@@ -107,6 +107,7 @@ export default {
 
   methods: {
     async onSubmit() {
+      console.log(this.v$)
       if (this.v$.$invalid) {
         this.v$.$touch()
         return

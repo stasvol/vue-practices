@@ -1,5 +1,6 @@
 <template>
   <div>
+<!--    <Head><Title>{{title}}</Title></Head>-->
     <div class="page-title">
       <h3>{{ $filters.localiseFilter('ProfileTitle')}}</h3>
     </div>
@@ -55,13 +56,14 @@ import useVuelidate from "@vuelidate/core";
 import {required} from "@vuelidate/validators";
 import {useMeta} from "vue-meta";
 import localiseFilter from "@/filters/localiseFilter";
-
 export default {
   name: 'profile',
   metaInfo() {
    return  {title: localiseFilter('ProfileTitle') }
   },
+
   setup () {
+       // title: localiseFilter('ProfileTitle')
      useMeta({ title: localiseFilter('ProfileTitle') })
      return {
       v$:  useVuelidate(),
